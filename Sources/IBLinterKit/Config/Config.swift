@@ -14,6 +14,7 @@ public struct Config: Codable {
     public let excluded: [String]
     public let included: [String]
     public let customModuleRule: [CustomModuleConfig]
+    public let customClassRule: [CustomClassConfig]
     public let useBaseClassRule: [UseBaseClassConfig]
     public let viewAsDeviceRule: ViewAsDeviceConfig?
     public let reporter: String
@@ -25,6 +26,7 @@ public struct Config: Codable {
         case enabledRules = "enabled_rules"
         case excluded = "excluded"
         case included = "included"
+        case customClassRule = "custom_class_rule"
         case customModuleRule = "custom_module_rule"
         case useBaseClassRule = "use_base_class_rule"
         case viewAsDeviceRule = "view_as_device_rule"
@@ -41,6 +43,7 @@ public struct Config: Codable {
         enabledRules = []
         excluded = []
         included = []
+        customClassRule = []
         customModuleRule = []
         useBaseClassRule = []
         viewAsDeviceRule = nil
@@ -51,6 +54,7 @@ public struct Config: Codable {
 
     init(disabledRules: [String] = [], enabledRules: [String] = [],
          excluded: [String] = [], included: [String] = [],
+         customClassRule: [CustomClassConfig] = [],
          customModuleRule: [CustomModuleConfig] = [],
          baseClassRule: [UseBaseClassConfig] = [],
          viewAsDeviceRule: ViewAsDeviceConfig? = nil,
@@ -60,6 +64,7 @@ public struct Config: Codable {
         self.enabledRules = enabledRules
         self.excluded = excluded
         self.included = included
+        self.customClassRule = customClassRule
         self.customModuleRule = customModuleRule
         self.useBaseClassRule = baseClassRule
         self.viewAsDeviceRule = viewAsDeviceRule
@@ -74,6 +79,7 @@ public struct Config: Codable {
         enabledRules = try container.decodeIfPresent(Optional<[String]>.self, forKey: .enabledRules).flatMap { $0 } ?? []
         excluded = try container.decodeIfPresent(Optional<[String]>.self, forKey: .excluded).flatMap { $0 } ?? []
         included = try container.decodeIfPresent(Optional<[String]>.self, forKey: .included).flatMap { $0 } ?? []
+        customClassRule = try container.decodeIfPresent(Optional<[CustomClassConfig]>.self, forKey: .customClassRule).flatMap { $0 } ?? []
         customModuleRule = try container.decodeIfPresent(Optional<[CustomModuleConfig]>.self, forKey: .customModuleRule).flatMap { $0 } ?? []
         useBaseClassRule = try container.decodeIfPresent(Optional<[UseBaseClassConfig]>.self, forKey: .useBaseClassRule)?.flatMap { $0 } ?? []
         viewAsDeviceRule = try container.decodeIfPresent(Optional<ViewAsDeviceConfig>.self, forKey: .viewAsDeviceRule) ?? nil

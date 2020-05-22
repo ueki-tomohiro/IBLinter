@@ -31,4 +31,13 @@ class ConfigTest: XCTestCase {
         XCTAssertNotNil(config.viewAsDeviceRule)
         XCTAssertEqual(config.viewAsDeviceRule?.deviceId, "retina3_5")
     }
+
+    func testCustomClassNameConfigFile() throws {
+        let url = fixture.path("Resources/Config/.iblinter_custom_class.yml")
+        let workingDirectory = url.deletingLastPathComponent()
+        let config = try Config(directoryURL: workingDirectory, fileName: url.lastPathComponent)
+        XCTAssertEqual(config.customClassRule.count, 1)
+        XCTAssertEqual(config.customClassRule.first?.elementClass, "UIViewController")
+        XCTAssertEqual(config.customClassRule.first?.suffix, "ViewController")
+    }
 }

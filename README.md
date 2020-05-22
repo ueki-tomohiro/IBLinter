@@ -151,6 +151,12 @@ excluded:
   - App
 included:
   - App/Views
+custom_class_rule:
+  - element_class: UICollectionViewCell
+    base: CollectionViewCell
+  - element_class: UIViewControlller
+    base: ViewController
+    strict: true
 custom_module_rule:
   - module: UIComponents
     included:

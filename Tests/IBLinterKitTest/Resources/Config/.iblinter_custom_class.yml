@@ -1,0 +1,5 @@
+enabled_rules: 
+custom_class_rule:
+  - element_class: UIViewController
+    suffix: ViewController
+    strict: true
